@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour {
     public float AirControl;
     public float JumpSpeed;
     public float Gravity;
+	public float TerminalVelocity;
 
     private CharacterController characterController;
 
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // apply gravity
         movement.y -= Gravity * Time.deltaTime;
+		movement.y = Mathf.Max(movement.y, -TerminalVelocity);
 
         // perform movement
         characterController.Move(movement * Time.deltaTime);

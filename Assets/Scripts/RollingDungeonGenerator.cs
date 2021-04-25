@@ -96,6 +96,7 @@ public class RollingDungeonGenerator : MonoBehaviour
 
 		int groupCount = Random.Range(GroupCountMin, GroupCountMax + 1);
 		bool needsOneWay = true;
+		bool canBranch = true;
 
 		Debug.Log($"generating next room group with {groupCount} rooms and trigger depth {nextTriggerDepth}");
 
@@ -110,6 +111,12 @@ public class RollingDungeonGenerator : MonoBehaviour
 				roomPrefab = OneWayRooms.RandomElement();
 
 				needsOneWay = false;
+			}
+			else if (canBranch && Random.value < 0.5f)
+			{
+				roomPrefab = BranchRooms.RandomElement();
+
+				canBranch = false;
 			}
 			else
 			{
